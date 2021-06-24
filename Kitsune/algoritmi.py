@@ -65,8 +65,6 @@ def algoritmo1(RMSE):
     weights = np.arange(0,1,1/len(RMSE))
     if len(weights)>len(RMSE):
         weights = weights[:len(RMSE)]
-    #elif len(RMSE)>len(weights):
-    #    RMSE = RMSE[:len(weights)]
 
     error = RMSE*weights
     s1 = np.mean(error)
@@ -164,13 +162,6 @@ for tss_iteration in range(10):
         if alg == "algoritmo1":
             print("Sto valutando l'algoritmo 1")
             algoritmo1(dataset_train[:,4])
-            tempi = open("Soglie.txt", "a")
-            tempi.write("\n\n\nFold numero %d" %tss_iteration)
-            tempi.write("\n  Algoritmo1: ")
-            tempi.write(" s1=%f" %s1)
-            tempi.write(" s2=%f" %s2)
-            tempi.write(" freq=%f" %freq)
-            tempi.close()
 
             for j in range(len(dataset_test[:,4])):
                 if dataset_test[j,4]>s2:
@@ -189,24 +180,12 @@ for tss_iteration in range(10):
             if alg == "algoritmo2":
                 print("Sto valutando l'algoritmo 2")
                 s = algoritmo2(dataset_train[:,4])
-                tempi = open("Soglie.txt", "a")
-                tempi.write("\n  Algoritmo 2: ")
-                tempi.write(" s=%f" %s)
-                tempi.close()
             elif alg == "algoritmo3":
                 print("Sto valutando l'algoritmo 3")
                 s = algoritmo3(dataset_train[:,4])
-                tempi = open("Soglie.txt", "a")
-                tempi.write("\n  Algoritmo 3: ")
-                tempi.write(" s=%f" %s)
-                tempi.close()
             elif alg == "naive_anomaly_threshold_with_decay":
                 print("Sto valutando l'algoritmo naive anomaly threshold with decay")
                 s = naive_anomaly_threshold_with_decay(dataset_train[:,4])
-                tempi = open("Soglie.txt", "a")
-                tempi.write("\n  Naive anomaly threshold with decay: ")
-                tempi.write(" s=%f" %s)
-                tempi.close()
 
 
             for j in range(len(dataset_test[:,4])):
